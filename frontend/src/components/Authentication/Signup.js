@@ -6,6 +6,7 @@ import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
+
 const Signup = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow((prevVal) => !prevVal);
@@ -82,29 +83,31 @@ const Signup = () => {
     }
   };
 
-  const postDetails = (pics) => {
+  const postDetails = (images) => {
     setPicLoading(true);
-    if (pics === undefined) {
+
+    if (images === undefined) {
       toast({
         title: "Please Select an Image!",
-        status: "warning",
+        status: "info",
         duration: 5000,
         isClosable: true,
         position: "bottom",
       });
+
       return;
     }
-    console.log(pics);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+
+    if (images.type === "image/jpeg" || images.type === "image/png") {
       const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "quick-chat-app");
-      data.append("cloud_name", "akash-quickchat");
-      fetch("https://api.cloudinary.com/v1_1/akash-quickchat/image/upload", {
+      data.append("file", images);
+      data.append("upload_preset", "qt2s3mo3");
+      data.append("cloud name", "akash-project");
+      fetch("https://api.cloudinary.com/v1_1/akash-project/image/upload", {
         method: "post",
         body: data,
       })
-        .then((res) => res.json())
+        .then((result) => result.json())
         .then((data) => {
           setPic(data.url.toString());
           console.log(data.url.toString());
@@ -117,7 +120,7 @@ const Signup = () => {
     } else {
       toast({
         title: "Please Select an Image!",
-        status: "warning",
+        status: "info",
         duration: 5000,
         isClosable: true,
         position: "bottom",
@@ -131,16 +134,27 @@ const Signup = () => {
     <VStack spacing="5px">
       <FormControl id="first-name" isRequired>
         <FormLabel>Name</FormLabel>
-        <Input placeholder="Enter Your Name" onChange={(e) => setName(e.target.value)}/>
+        <Input
+          placeholder="Enter Your Name"
+          onChange={(e) => setName(e.target.value)}
+        />
       </FormControl>
       <FormControl id="email" isRequired>
         <FormLabel>Email Address</FormLabel>
-        <Input type="email" placeholder="Enter Your Email Address" onChange={(e) => setEmail(e.target.value)}/>
+        <Input
+          type="email"
+          placeholder="Enter Your Email Address"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </FormControl>
       <FormControl id="password" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
-          <Input type={show ? "text" : "password"} placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)}/>
+          <Input
+            type={show ? "text" : "password"}
+            placeholder="Enter Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
               {show ? "Hide" : "Show"}
@@ -151,7 +165,11 @@ const Signup = () => {
       <FormControl id="password" isRequired>
         <FormLabel>Confirm Password</FormLabel>
         <InputGroup size="md">
-          <Input type={show ? "text" : "password"} placeholder="Confirm password" onChange={(e) => setConfirmpassword(e.target.value)}/>
+          <Input
+            type={show ? "text" : "password"}
+            placeholder="Confirm password"
+            onChange={(e) => setConfirmpassword(e.target.value)}
+          />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
               {show ? "Hide" : "Show"}
@@ -161,9 +179,22 @@ const Signup = () => {
       </FormControl>
       <FormControl id="pic">
         <FormLabel>Upload your Picture</FormLabel>
-        <Input type="file" p={1.5} accept="image/*" onChange={(e) => {postDetails(e.target.files[0]);}}/>
+        <Input
+          type="file"
+          p={1.5}
+          accept="image/*"
+          onChange={(e) => {
+            postDetails(e.target.files[0]);
+          }}
+        />
       </FormControl>
-      <Button colorScheme="blue" width="100%" style={{ marginTop: 15 }} onClick={submitHandler} isLoading={picLoading}>
+      <Button
+        colorScheme="blue"
+        width="100%"
+        style={{ marginTop: 15 }}
+        onClick={submitHandler}
+        isLoading={picLoading}
+      >
         Sign Up
       </Button>
     </VStack>
