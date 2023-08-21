@@ -7,7 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { errorHandler, notFound } = require("./middleware/errorMiddleware");
-dotenv.config({ path: "./../QuickChat/.env" });
+dotenv.config();
 connectDB();
 const app = express();
 app.use(express.json()); //to accept json data
