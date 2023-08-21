@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import {
   Avatar,
@@ -17,15 +17,18 @@ import {
   DrawerBody,
   Input,
   useToast,
-  Spinner
+  Spinner,
 } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
-import UserListItem from '../userAvatar/UserListItem.js';
+import UserListItem from "../userAvatar/UserListItem.js";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import ProfileModal from "./ProfileModal";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { getSender } from "../../config/ChatLogics";
+import { Effect } from "react-notification-badge";
+import NotificationBadge from 'react-notification-badge';
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -43,7 +46,8 @@ const SideDrawer = () => {
   } = ChatState();
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure(false);
-  const toast=useToast();
+  const toast = useToast();
+  useEffect(() => {}, [notification]);
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     history.push("/");
@@ -86,7 +90,6 @@ const SideDrawer = () => {
   };
 
   const accessChat = async (userId) => {
-    // console.log(userId);
     try {
       setLoadingChat(true);
       const config = {
@@ -138,9 +141,28 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
+              <NotificationBadge count={notification.length} effect={Effect.SCALE} />
               <BellIcon fontSize={"2xl"} m={1} />
             </MenuButton>
-            {/*<MenuList></MenuList>*/}
+            <MenuList pl={2}>
+              {console.log(notification)}
+              {!notification.length && "No New Messages"}
+              {notification.map((notif) => (
+                <MenuItem
+                  key={notif._id}
+                  onClick={() => {
+                    setSelectedChat(notif.chat);
+                    setNotification((prevNotif) =>
+                      prevNotif.filter((n) => n !== notif)
+                    );
+                  }}
+                >
+                  {notif.chat.isGroupChat
+                    ? `New Message in ${notif.chat.chatName}`
+                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -172,9 +194,7 @@ const SideDrawer = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button 
-              onClick={handleSearch}
-              >Go</Button>
+              <Button onClick={handleSearch}>Go</Button>
             </Box>
             {loading ? (
               <ChatLoading />
@@ -186,7 +206,7 @@ const SideDrawer = () => {
                   handleFunction={() => accessChat(user._id)}
                 />
               ))
-              )}
+            )}
             {loadingChat && <Spinner ml="auto" d="flex" />}
           </DrawerBody>
         </DrawerContent>
