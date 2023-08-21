@@ -15,9 +15,9 @@ import {
   Text,
   Tooltip,
   DrawerBody,
-  Spinner,
   Input,
   useToast,
+  Spinner
 } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
 import UserListItem from '../userAvatar/UserListItem.js';
@@ -86,8 +86,7 @@ const SideDrawer = () => {
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
-
+    // console.log(userId);
     try {
       setLoadingChat(true);
       const config = {
