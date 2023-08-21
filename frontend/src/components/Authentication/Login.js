@@ -10,7 +10,7 @@ import { ChatState } from "../../Context/ChatProvider";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+  const handleClick = () => setShow((prevShow)=>(!prevShow));
   const toast = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

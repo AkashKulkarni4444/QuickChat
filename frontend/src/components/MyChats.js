@@ -8,7 +8,7 @@ import ChatLoading from "./ChatLoading";
 import { AddIcon } from "@chakra-ui/icons";
 import GroupChatModal from "./miscellaneous/GroupChatModal.js";
 const MyChats = ({ fetchAgain }) => {
-  const [loggedUser, setLoggedUser] = useState();
+  const [loggedUser, setLoggedUser] = useState('');
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
   const toast = useToast();
   const fetchChats = async () => {
