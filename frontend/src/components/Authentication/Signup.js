@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
-
+const ENDPOINT = "https://quickchat-wvdt.onrender.com";
 const Signup = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow((prevVal) => !prevVal);
@@ -50,7 +50,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user",
+        `${ENDPOINT}/api/user`,
         {
           name,
           email,

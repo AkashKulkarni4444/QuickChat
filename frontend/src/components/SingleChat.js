@@ -21,8 +21,7 @@ import Lottie from "lottie-react";
 import animationData from "../animations/typing.json";
 const bgimg = require("../public/background5.jpg");
 const animData = require("../public/animationLottie");
-const ENDPOINT = "http://localhost:5000";
-// https://quickchat-ft7h.onrender.com
+const ENDPOINT = "https://quickchat-wvdt.onrender.com/";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -64,7 +63,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `${ENDPOINT}/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -95,7 +94,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          `/api/message`,
+          `${ENDPOINT}/api/message`,
           {
             content: newMessage,
             chatId: selectedChat._id,
