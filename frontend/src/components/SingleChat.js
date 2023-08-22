@@ -19,7 +19,8 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import Lottie from "lottie-react";
 import animationData from "../animations/typing.json";
-
+const bgimg = require('../public/background5.jpg');
+const animData = require ('../public/animationLottie');
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
@@ -169,7 +170,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   return (
     <>
       {selectedChat ? (
-        <>
+        <div style={{width:"100%",height:"90%",backgroundImage:'../public/background2.jpg'}} >
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             pb={3}
@@ -213,6 +214,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             h="100%"
             borderRadius="lg"
             overflowY="hidden"
+            backgroundImage={bgimg}
           >
             {loading ? (
               <Spinner
@@ -234,28 +236,29 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               mt={3}
             >
               {isTyping ? (
-                <div>
+                <div style={{maxHeight:"2rem",maxWidth:"6rem",marginBottom:"1rem"}} >
                   <Lottie
                     options={defaultOptions}
-                    // height={50}
+                    height={50}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
+                    animationData={animData}
                   />
-                  typing
                 </div>
               ) : (
                 <></>
               )}
               <Input
                 variant="filled"
-                bg="#E0E0E0"
+                backgroundColor="#E0E0E0"
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
+                style={{backgroundColor:'#E0E0E0'}}
               />
             </FormControl>
           </Box>
-        </>
+        </div>
       ) : (
         <>
           <Box display="flex" alignItems="center" h="100%">

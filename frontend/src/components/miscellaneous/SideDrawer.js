@@ -18,6 +18,7 @@ import {
   Input,
   useToast,
   Spinner,
+  Image,
 } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../userAvatar/UserListItem.js";
@@ -28,7 +29,8 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { getSender } from "../../config/ChatLogics";
 import { Effect } from "react-notification-badge";
-import NotificationBadge from 'react-notification-badge';
+import NotificationBadge from "react-notification-badge";
+const logo = require('../../public/logos/png/logo-color-snipped-2.png')
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -135,13 +137,16 @@ const SideDrawer = () => {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
-          QuickChat
-        </Text>
+        <div style={{ maxHeight: "3rem" }}>
+          <Image style={{ maxHeight: "3rem" }} src={logo} />
+        </div>
         <div>
           <Menu>
             <MenuButton p={1}>
-              <NotificationBadge count={notification.length} effect={Effect.SCALE} />
+              <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              />
               <BellIcon fontSize={"2xl"} m={1} />
             </MenuButton>
             <MenuList pl={2}>
