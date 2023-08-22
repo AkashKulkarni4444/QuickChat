@@ -19,8 +19,8 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import Lottie from "lottie-react";
 import animationData from "../animations/typing.json";
-const bgimg = require('../public/background5.jpg');
-const animData = require ('../public/animationLottie');
+const bgimg = require("../public/background5.jpg");
+const animData = require("../public/animationLottie");
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
@@ -118,7 +118,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    socket.emit("setup",user);
+    socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
@@ -143,7 +143,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setMessages([...messages, newMessageReceived]);
       }
     });
-  }, [notification,messages]);
+  }, [notification, messages]);
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -170,7 +170,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   return (
     <>
       {selectedChat ? (
-        <div style={{width:"100%",height:"90%",backgroundImage:'../public/background2.jpg'}} >
+        <div
+          style={{
+            width: "100%",
+            height: "90%",
+            backgroundImage: "../public/background2.jpg",
+          }}
+        >
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             pb={3}
@@ -236,7 +242,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               mt={3}
             >
               {isTyping ? (
-                <div style={{maxHeight:"2rem",maxWidth:"6rem",marginBottom:"1rem"}} >
+                <div
+                  style={{
+                    maxHeight: "2rem",
+                    maxWidth: "6rem",
+                    marginBottom: "1rem",
+                  }}
+                >
                   <Lottie
                     options={defaultOptions}
                     height={50}
@@ -254,7 +266,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
-                style={{backgroundColor:'#E0E0E0'}}
+                style={{ backgroundColor: "#E0E0E0" }}
               />
             </FormControl>
           </Box>

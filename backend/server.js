@@ -32,7 +32,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: `http://localhost:${process.env.PORT2}`,
   },
 });
 
@@ -63,8 +63,8 @@ io.on("connection", (socket) => {
       socket.in(user._id).emit("message received", newMessageReceived);
     });
   });
-  
-  socket.off("setup",()=>{
+
+  socket.off("setup", () => {
     console.log("USER DISCONNECTED");
     socket.leave(userData._id);
   });
