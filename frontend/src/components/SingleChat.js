@@ -21,7 +21,7 @@ import Lottie from "lottie-react";
 import animationData from "../animations/typing.json";
 const bgimg = require("../public/background5.jpg");
 const animData = require("../public/animationLottie");
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://quickchat-ft7h.onrender.com/";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
