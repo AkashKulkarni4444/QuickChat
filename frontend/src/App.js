@@ -8,8 +8,8 @@ function App() {
   const makeAPICall = async () => {
     try {
       const response = await fetch('https://quickchat-wvdt.onrender.com/', {mode:'cors'});
-      const data = await response.json();
-      console.log({ data })
+      const {data} = await response.json();
+      console.log(data);
     }
     catch (e) {
       console.log(e)
