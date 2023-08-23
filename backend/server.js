@@ -12,12 +12,11 @@ dotenv.config();
 connectDB();
 const app = express();
 
-app.use(cors())
-app.use(express.json()); //to accept json data
+app.use(cors());
+app.use(function (req, res, next) {
 
-app.get("/", (req, res) => {
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'https://akash-quickchat.netlify.app/');
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -28,12 +27,15 @@ app.get("/", (req, res) => {
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true);
-  
-  res.send("API is running");
 
   // Pass to next layer of middleware
   next();
+});
+app.use(express.json()); //to accept json data
+
+app.get("/", (req, res) => {
   // res.set('Access-Control-Allow-Origin', 'https://akash-quickchat.netlify.app/');
+  res.send("API is running.CORS error fixed.");
 });
 
 
