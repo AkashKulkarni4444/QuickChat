@@ -37,7 +37,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: `*`,
+    origin: `https://akash-quickchat.netlify.app/`,
   },
 });
 // const io = require('socket.io')(server, {cors: {origin: "*"}});
