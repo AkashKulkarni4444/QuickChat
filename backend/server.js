@@ -7,7 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { errorHandler, notFound } = require("./middleware/errorMiddleware");
-const cors = require('cors')
+var cors = require('cors')
 dotenv.config();
 connectDB();
 const app = express();
@@ -18,6 +18,8 @@ app.use(express.json()); //to accept json data
 app.get("/", (req, res) => {
   res.send("API is running");
 });
+
+res.set('Access-Control-Allow-Origin', 'https://akash-quickchat.netlify.app/');
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);

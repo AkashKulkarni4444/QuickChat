@@ -22,7 +22,8 @@ import animationData from "../animations/typing.json";
 const bgimg = require("../public/background5.jpg");
 const animData = require("../public/animationLottie");
 const ENDPOINT = "https://quickchat-wvdt.onrender.com/";
-var socket, selectedChatCompare;
+var socket = io(ENDPOINT);
+var selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
