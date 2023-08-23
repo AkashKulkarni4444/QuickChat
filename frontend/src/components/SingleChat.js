@@ -53,23 +53,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
-
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
-
       setLoading(true);
-
       const { data } = await axios.get(
-        `${ENDPOINT}/api/message/${selectedChat._id}`,
+        `${ENDPOINT}api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
       setLoading(false);
-
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
       toast({
@@ -95,7 +91,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          `${ENDPOINT}/api/message`,
+          `${ENDPOINT}api/message`,
           {
             content: newMessage,
             chatId: selectedChat._id,

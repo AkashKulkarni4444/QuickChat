@@ -31,6 +31,7 @@ import { getSender } from "../../config/ChatLogics";
 import { Effect } from "react-notification-badge";
 import NotificationBadge from "react-notification-badge";
 const logo = require('../../public/logos/png/logo-color-snipped-2.png')
+const ENDPOINT = "https://quickchat-wvdt.onrender.com";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -75,7 +76,7 @@ const SideDrawer = () => {
         },
       };
 
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(`${ENDPOINT}/api/user?search=${search}`, config);
 
       setLoading(false);
       setSearchResult(data);
@@ -100,7 +101,7 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`/api/chat`, { userId }, config);
+      const { data } = await axios.post(`${ENDPOINT}/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
