@@ -17,9 +17,9 @@ app.use(express.json()); //to accept json data
 
 app.get("/", (req, res) => {
   res.send("API is running");
+  res.set('Access-Control-Allow-Origin', 'https://akash-quickchat.netlify.app/');
 });
 
-res.set('Access-Control-Allow-Origin', 'https://akash-quickchat.netlify.app/');
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
